@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #2ecc71;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+
+        ::placeholder {
+            color: #95a5a6;
+        }
+    </style>
+    <title>帳號註冊</title>
+</head>
+<body>
+    <div>
+        <h1>帳號註冊</h1>
+        <form action="/people/add" method="post">
+            <input type="text" name="name" placeholder="帳號"/>
+            <br>
+            <input type="password" name="password" placeholder="密碼"/>
+            <br>
+            <input type="submit" value="註冊">
+        </form>
+    </div>
+</body>
+</html>

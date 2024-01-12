@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3x3 OX遊戲</title>
+  <style>
+    /* CSS樣式 */
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      width: 300px;
+      height: 300px;
+    }
+
+    .cell {
+      border: 1px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* 彈窗樣式 */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-board">
+    <div class="cell" onclick="makeMove(0, 0)"></div>
+    <div class="cell" onclick="makeMove(0, 1)"></div>
+    <div class="cell" onclick="makeMove(0, 2)"></div>
+    <div class="cell" onclick="makeMove(1, 0)"></div>
+    <div class="cell" onclick="makeMove(1, 1)"></div>
+    <div class="cell" onclick="makeMove(1, 2)"></div>
+    <div class="cell" onclick="makeMove(2, 0)"></div>
+    <div class="cell" onclick="makeMove(2, 1)"></div>
+    <div class="cell" onclick="makeMove(2, 2)"></div>
+  </div>
+
+  <div class="overlay">
+    <div class="popup">
+      <h2>遊戲結束</h2>
+      <p id="winner-message"></p>
+      <button onclick="resetGame()">重新開始</button>
+    </div>
+  </div>
+
+  <button class="button" onclick="goToHomePage()">返回首頁</button>
+
+  <script>
+    // JavaScript代碼
+    // 初始化遊戲狀態
+    let currentPlayer = "O";
+    let gameEnded = false;
+    const cells = document.querySelectorAll(".cell");
+    const overlay = document.querySelector(".overlay");
+    const winnerMessage = document.getElementById("winner-message");
+
+    // 井字遊戲勝利條件
+    const winConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+
+    // 處理玩家的移動
+    function makeMove(row, col) {
+      if (gameEnded) return;
+      const cell = cells[row * 3 + col];
+      if (!cell.textContent) {
+        cell.textContent = currentPlayer;
+        currentPlayer = currentPlayer === "O" ? "X" : "O";
+        checkWin();
+      }
+    }
+
+    // 檢查勝利條件
+    function checkWin() {
+      for (const condition of winConditions) {
+        const [a, b, c] = condition;
+        if (
+          cells[a].textContent &&
+          cells[a].textContent === cells[b].textContent &&
+          cells[a].textContent === cells[c].textContent
+        ) {
+          showWinner(cells[a].textContent);
+          return;
+        }
+      }
+      if (Array.from(cells).every((cell) => cell.textContent)) {
+        showWinner("平局");
+      }
+    }
+
+    // 顯示勝利訊息和彈窗
+    function showWinner(winner) {
+      winnerMessage.textContent = winner !== "平局" ? `${winner} 獲勝！` : "平局";
+      overlay.style.display = "flex";
+      gameEnded = true;
+    }
+
+    // 重製遊戲
+    function resetGame() {
+      for (const cell of cells) {
+        cell.textContent = "";
+      }
+      currentPlayer = "O";
+      overlay.style.display = "none";
+      gameEnded = false;
+    }
+
+    // 返回首頁
+    function goToHomePage() {
+      window.location.href = "homepage.html";
+    }
+  </script>
+</body>
+</html>

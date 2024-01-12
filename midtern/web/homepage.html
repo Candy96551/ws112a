@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>遊戲首頁</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .container {
+      margin-top: 100px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>歡迎來到遊戲首頁！</h1>
+    <button class="button" onclick="startGame()">開始遊戲</button>
+    <br>
+    <br>
+    <p>遊戲說明：這是一個簡單的圈叉遊戲，在3x3的棋盤上先連成三個相同的符號（O或X）的一方獲勝。</p>
+  </div>
+
+  <script>
+    function startGame() {
+      window.location.href = "oxgame.html";
+    }
+  </script>
+</body>
+</html>
